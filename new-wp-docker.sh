@@ -3,17 +3,17 @@
 # Get the secrets 
 while [[ -z "$SITENAME" ]]
 do
-  read -s -p "Enter a new site name for this server: " SITENAME
+  read -p "Enter a new site name for this server: " SITENAME
 done
 
 while [[ -z "$WPFQDN" ]]
 do
-  read -s -p "Enter a domain name (e.g. www.mysite.co.uk): " WPFQDN
+  read -p "Enter a domain name (e.g. www.mysite.co.uk): " WPFQDN
 done
 
 while [[ -z "$CERTEMAIL" ]]
 do
-  read -s -p "Enter an email for certificate: " CERTEMAIL
+  read -p "Enter an email for certificate: " CERTEMAIL
 done
 
 while [[ -z "$MYSQLROOTPASSWORD" ]]
