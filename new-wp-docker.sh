@@ -30,21 +30,22 @@ MYSQLDBNAME = $SITENAME + "-mariadb"
 MYSQLUSER = "wp-" + $SITENAME + "-dbuser"
 WPMEMORYCONF = $SITENAME + "-memorylimit.ini"
 
+
 # increase allowed memory limit for uploads on wordpress - this file is mounted from home dir
 printf "file_uploads = On\nmemory_limit = 64M\nupload_max_filesize = 64M\npost_max_size = 64M\nmax_execution_time = 600" > ~/$WPMEMORYCONF
 
 docker run --name $MYSQLDBNAME --net dockerwp \
-	-v mariadb1:/var/lib/mysql \
+	-v $MYSQLDBNAME:/var/lib/mysql \
 	-e MYSQL_ROOT_PASSWORD=$MYSQLROOTPASSWORD \
 	-e MYSQL_DATABASE=$MYSQLDBNAME \
 	-e MYSQL_USER=$MYSQLUSER \
 	-e MYSQL_PASSWORD=$MYSQLPASSWORD \
 	-d --restart always mariadb
 
-docker run --name wordpress1 --net dockerwp \
-	-v wordpress1:/var/www/html \
+docker run --name $SITENAME --net dockerwp \
+	-v $SITENAME:/var/www/html \
 	-v ~/$WPMEMORYCONF:/usr/local/etc/php/conf.d/uploads.ini \
-	-e WORDPRESS_DB_HOST=mariadb1:3306 \
+	-e WORDPRESS_DB_HOST=$MYSQLDBNAME:3306 \
 	-e WORDPRESS_DB_NAME=$MYSQLDBNAME \
 	-e WORDPRESS_DB_USER=$MYSQLUSER \
 	-e WORDPRESS_DB_PASSWORD=$MYSQLPASSWORD \
