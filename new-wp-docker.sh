@@ -35,7 +35,7 @@ WPMEMORYCONF = $SITENAME-memorylimit.ini
 printf "file_uploads = On\nmemory_limit = 64M\nupload_max_filesize = 64M\npost_max_size = 64M\nmax_execution_time = 600" > ~/$WPMEMORYCONF
 
 docker run --name $MYSQLDBNAME --net dockerwp \
-	-v $MYSQLDBNAME:/var/lib/mysql \
+	-v ~/$MYSQLDBNAME:/var/lib/mysql \
 	-e MYSQL_ROOT_PASSWORD=$MYSQLROOTPASSWORD \
 	-e MYSQL_DATABASE=$MYSQLDBNAME \
 	-e MYSQL_USER=$MYSQLUSER \
@@ -43,7 +43,7 @@ docker run --name $MYSQLDBNAME --net dockerwp \
 	-d --restart always mariadb
 
 docker run --name $SITENAME --net dockerwp \
-	-v $SITENAME:/var/www/html \
+	-v ~/$SITENAME:/var/www/html \
 	-v ~/$WPMEMORYCONF:/usr/local/etc/php/conf.d/uploads.ini \
 	-e WORDPRESS_DB_HOST=$MYSQLDBNAME:3306 \
 	-e WORDPRESS_DB_NAME=$MYSQLDBNAME \
