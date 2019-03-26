@@ -93,9 +93,11 @@ awk '/[sshd]/ { print; print "enabled=true"; next }1' /etc/fail2ban/jail.local
 apt-get install ufw -q -y
 ufw allow ssh
 ufw allow 22
+ufw allow 80
+ufw allow 443
 ufw default allow outgoing
 ufw default deny incoming
-sed -i 's/IPv6=yes/IPv6=no' /etc/default/ufw
+sed -i 's/IPV6=yes/IPV6=no/' /etc/default/ufw
 ufw enable
 
 # use linode helper to disable ssh root access
