@@ -26,9 +26,9 @@ do
   read -s -p "Enter a password for WP user MySQL: " MYSQLPASSWORD
 done
 
-MYSQLDBNAME = $SITENAME + "-mariadb"
-MYSQLUSER = "wp-" + $SITENAME + "-dbuser"
-WPMEMORYCONF = $SITENAME + "-memorylimit.ini"
+MYSQLDBNAME = $SITENAME-mariadb
+MYSQLUSER = wp-$SITENAME-dbuser
+WPMEMORYCONF = $SITENAME-memorylimit.ini
 
 
 # increase allowed memory limit for uploads on wordpress - this file is mounted from home dir
