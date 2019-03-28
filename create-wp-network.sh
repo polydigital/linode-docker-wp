@@ -4,6 +4,7 @@ docker network create dockerwp
 
 docker run --name nginx-proxy --net dockerwp -p 80:80 -p 443:443 \
 	-v ~/certs:/etc/nginx/certs \
+	-v ~/nginx_conf/custom_settings.conf:/etc/nginx/conf.d/custom_settings.conf \
 	-v /etc/nginx/vhost.d \
 	-v /usr/share/nginx/html \
 	-v /var/run/docker.sock:/tmp/docker.sock:ro \
